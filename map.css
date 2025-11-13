@@ -6,7 +6,6 @@ body {
   width: 100%;
   display: flex;
   justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
 }
 
 #map {
@@ -25,10 +24,9 @@ body {
 }
 
 #map svg circle{
-  fill: steelblue;
-  fill-opacity: 60%;
-  stroke: white;
-  pointer-events: auto;
+    fill-opacity: 60%;
+    stroke: white;
+    pointer-events: auto;
 }
 
 header{
@@ -39,12 +37,76 @@ header{
 
 label{
   margin-left: auto;
+  width: 50%;
+  max-width: none; 
+  text-align: right;
+  margin-bottom: 15px;           
 }
 
 time{
   display:block;
+  text-align: right;
 }
 
 em{
   display:block;
+}
+
+#time-slider {
+  width: 70%;       /* fill the width of its container */
+  max-width: none;   /* remove any width limit */
+  margin-top: 0.5em; /* optional spacing from label text */
+}
+
+
+:root {
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+}
+
+/* shared color rule */
+#map circle,
+.legend > div {
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+  fill: var(--color);
+  background: var(--color);
+}
+
+.legend {
+  display: flex;
+  gap: 2px;
+  margin-block: 1em;
+  width: 100%;
+  max-width: none;
+}
+
+.legend > div {
+  flex: 1;
+  gap: 1px;
+  padding: 0.2em 1em;
+  border-radius: 4px;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+  background: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+}
+
+.legend > div:nth-child(1) {
+  text-align: left;
+}
+
+.legend > div:nth-child(2) {
+  text-align: center;
+}
+
+.legend > div:nth-child(3) {
+  text-align: right;
 }
